@@ -3,23 +3,23 @@
 // a few operations on the grid.
 
 public class CharGrid {
-	private char[][] grid;
+    private char[][] grid;
 
-	/**
-	 * Constructs a new CharGrid with the given grid.
-	 * Does not make a copy.
-	 * @param grid
-	 */
-	public CharGrid(char[][] grid) {
-		this.grid = grid;
-	}
-	
-	/**
-	 * Returns the area for the given char in the grid. (see handout).
-	 * @param ch char to look for
-	 * @return area for given char
-	 */
-	public int charArea(char ch) {
+    /**
+     * Constructs a new CharGrid with the given grid.
+     * Does not make a copy.
+     * @param grid
+     */
+    public CharGrid(char[][] grid) {
+        this.grid = grid;
+    }
+
+    /**
+     * Returns the area for the given char in the grid. (see handout).
+     * @param ch char to look for
+     * @return area for given char
+     */
+    public int charArea(char ch) {
 
         // YOUR CODE HERE
         int r = grid.length;
@@ -38,12 +38,12 @@ public class CharGrid {
         }
         if (endrow == -1) return 0;
         return (endrow - startrow + 1) * (endcol - startcol + 1);
-	}
-	
-	/**
-	 * Returns the count of '+' figures in the grid (see handout).
-	 * @return number of + in grid
-	 */
+    }
+
+    /**
+     * Returns the count of '+' figures in the grid (see handout).
+     * @return number of + in grid
+     */
 
     private int leng(int i, int j, int dr, int dc, char ch) {
         int leng = 0;
@@ -57,22 +57,22 @@ public class CharGrid {
         return leng;
     }
 
-	public int countPlus() {
+    public int countPlus() {
         int count = 0;
         int r = grid.length;
         int c = grid[0].length;
         for (int i  = 0; i < r; i++) {
             for (int j  = 0; j < c; j++) {
                 if (grid[i][j] == ' ') continue;
-                    int up = leng(i,j,-1,0,grid[i][j]);
-                    int down = leng(i,j,1,0,grid[i][j]);
-                    int left = leng(i,j,0,-1,grid[i][j]);
-                    int right = leng(i,j,0,1,grid[i][j]);
-                    if (up >= 1 && down >= 1 && left >= 1 && right >= 1 && up == down && up == left && up == right) {
-                        ++count;
-                    }
+                int up = leng(i,j,-1,0,grid[i][j]);
+                int down = leng(i,j,1,0,grid[i][j]);
+                int left = leng(i,j,0,-1,grid[i][j]);
+                int right = leng(i,j,0,1,grid[i][j]);
+                if (up >= 1 && down >= 1 && left >= 1 && right >= 1 && up == down && up == left && up == right) {
+                    ++count;
+                }
             }
         }
         return count;
-	}
+    }
 }
