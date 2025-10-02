@@ -20,15 +20,59 @@ public class CharGrid {
 	 * @return area for given char
 	 */
 	public int charArea(char ch) {
-		return 0; // YOUR CODE HERE
+
+        // YOUR CODE HERE
+        int r = grid.length;
+        int c = grid[0].length;
+        int startrow = r; int endrow = -1;
+        int startcol = c; int endcol = -1;
+        for (int i = 0; i < r;i++) {
+            for (int j = 0; j < c;j++) {
+                if (grid[i][j] == ch) {
+                    if (i < startrow) startrow = i;
+                    if (j < startcol) startcol = j;
+                    if (i > endrow) endrow = i;
+                    if (j > endcol) endcol = j;
+                }
+            }
+        }
+        if (endrow == -1) return 0;
+        return (endrow - startrow + 1) * (endcol - startcol + 1);
 	}
 	
 	/**
 	 * Returns the count of '+' figures in the grid (see handout).
 	 * @return number of + in grid
 	 */
+
+    private int leng(int i, int j, int dr, int dc, char ch) {
+        int leng = 0;
+        int row = i + dr;
+        int col = j + dc;
+        while (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] == ch) {
+            leng++;
+            row += dr;
+            col += dc;
+        }
+        return leng;
+    }
+
 	public int countPlus() {
-		return 0; // YOUR CODE HERE
+        int count = 0;
+        int r = grid.length;
+        int c = grid[0].length;
+        for (int i  = 0; i < r; i++) {
+            for (int j  = 0; j < c; j++) {
+                if (grid[i][j] == ' ') continue;
+                    int up = leng(i,j,-1,0,grid[i][j]);
+                    int down = leng(i,j,1,0,grid[i][j]);
+                    int left = leng(i,j,0,-1,grid[i][j]);
+                    int right = leng(i,j,0,1,grid[i][j]);
+                    if (up >= 1 && down >= 1 && left >= 1 && right >= 1 && up == down && up == left && up == right) {
+                        ++count;
+                    }
+            }
+        }
+        return count;
 	}
-	
 }
